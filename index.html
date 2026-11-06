@@ -49,7 +49,7 @@ h2{font:900 clamp(26px,4vw,38px)/1.1 'Source Serif 4',Georgia,serif;margin-botto
 .tile.in{animation:pop .35s both}
 @keyframes pop{from{opacity:0;transform:scale(.96)}}
 .tile .lab{position:absolute;top:12px;left:12px}
-.tile .t{font:900 clamp(19px,2.2vw,25px)/1.04 'Source Serif 4',Georgia,serif}
+.tile .t{font:900 clamp(17px,1.9vw,22px)/1.06 'Source Serif 4',Georgia,serif;display:-webkit-box;-webkit-line-clamp:4;line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
 
 .tile .dm{display:block;margin-top:6px;font-size:11px;color:var(--mut)}
 .play{position:absolute;left:50%;top:40%;width:52px;height:52px;border:2px solid var(--cr);border-radius:50%;transform:translate(-50%,-50%)}
@@ -161,11 +161,12 @@ function frame(id,label){
 (async()=>{
 try{const r=await fetch('videos.json',{cache:'no-store'});if(r.ok)Object.assign(CONFIG,await r.json())}catch(e){}
 const feat=document.getElementById('featured'),fid=vid(CONFIG.featured);
+const VIDS=CONFIG.videos.filter(v=>!fid||vid(v.u)!==fid);
 if(fid){const f=frame(fid,'Video destacado');f.src=f.src.replace('?autoplay=1','');feat.appendChild(f)}
 else feat.insertAdjacentHTML('beforeend','<div class="ph"><div><b>Video destacado</b>Aquí aparecerá el video de YouTube</div></div>');
 
 const wall=document.getElementById('wall'),filters=document.getElementById('filters');
-CONFIG.videos.forEach(v=>{
+VIDS.forEach(v=>{
   const b=document.createElement('button');
   b.type='button';b.className='tile '+(v.f==='largo'?'long':'');b.dataset.t=v.t;
   b.setAttribute('aria-label','Reproducir: '+(v.h||v.t));
@@ -193,7 +194,7 @@ function setFilter(t){
   });
 }
 ['Todo',...CONFIG.temas].forEach(t=>{
-  const n=t==='Todo'?CONFIG.videos.length:CONFIG.videos.filter(v=>v.t===t).length;
+  const n=t==='Todo'?VIDS.length:VIDS.filter(v=>v.t===t).length;
   const b=document.createElement('button');
   b.type='button';b.className='fbtn';b.dataset.t=t;b.setAttribute('aria-pressed',t==='Todo');
   b.innerHTML=t+'<small>'+n+'</small>';
