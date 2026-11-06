@@ -1,0 +1,94 @@
+{
+  "featured": "",
+  "email": "hola@ejemplo.com",
+  "temas": [
+    "Política",
+    "Tecnología",
+    "Economía",
+    "Sociedad"
+  ],
+  "videos": [
+    {
+      "u": "",
+      "t": "Política",
+      "f": "largo",
+      "h": "Tres ciudades sin luz"
+    },
+    {
+      "u": "",
+      "t": "Tecnología",
+      "f": "corto",
+      "h": "El chip que todos quieren"
+    },
+    {
+      "u": "",
+      "t": "Economía",
+      "f": "corto",
+      "h": "Cuando suben los precios"
+    },
+    {
+      "u": "",
+      "t": "Sociedad",
+      "f": "corto",
+      "h": "La calle habla"
+    },
+    {
+      "u": "",
+      "t": "Tecnología",
+      "f": "largo",
+      "h": "Máquinas que aprenden"
+    },
+    {
+      "u": "",
+      "t": "Política",
+      "f": "corto",
+      "h": "Cumbre a puerta cerrada"
+    },
+    {
+      "u": "",
+      "t": "Economía",
+      "f": "largo",
+      "h": "El mapa del comercio"
+    },
+    {
+      "u": "",
+      "t": "Sociedad",
+      "f": "corto",
+      "h": "Ciudades sin jóvenes"
+    },
+    {
+      "u": "",
+      "t": "Política",
+      "f": "corto",
+      "h": "El voto que no llegó"
+    },
+    {
+      "u": "",
+      "t": "Economía",
+      "f": "corto",
+      "h": "El precio de la energía"
+    }
+  ],
+  "social": [
+    {
+      "n": "Instagram",
+      "s": "IG",
+      "u": "#"
+    },
+    {
+      "n": "TikTok",
+      "s": "TT",
+      "u": "#"
+    },
+    {
+      "n": "YouTube",
+      "s": "YT",
+      "u": "#"
+    },
+    {
+      "n": "Facebook",
+      "s": "FB",
+      "u": "#"
+    }
+  ]
+}

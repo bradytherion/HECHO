@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>HECHO · Panel</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@600;900&family=Inter+Tight:wght@400;600&display=swap">
+<style>
+:root{--bg:#0B0B0A;--panel:#171614;--line:#2C2A26;--cr:#EDE0B5;--mut:#A29F93}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:#fff;font:15px/1.5 'Inter Tight',system-ui,sans-serif;padding:20px 16px 110px}
+.w{max-width:860px;margin:0 auto}
+h1{font:900 34px 'Source Serif 4',Georgia,serif;border-top:2px solid var(--cr);display:inline-block;padding-top:8px;margin-bottom:4px}
+h2{font:900 21px 'Source Serif 4',Georgia,serif;margin-bottom:10px}
+.sub{color:var(--mut);margin-bottom:22px}
+section{background:var(--panel);border:1px solid var(--line);padding:18px;margin-bottom:18px}
+label{display:block;font-size:13px;color:var(--mut);margin:10px 0 4px}
+input,select{width:100%;background:#0B0B0A;color:#fff;border:1px solid #3A3832;padding:10px;font:inherit}
+input:focus,select:focus,button:focus-visible{outline:2px solid var(--cr);outline-offset:1px}
+.g{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+button{font:600 14px 'Inter Tight',sans-serif;padding:10px 16px;border:1px solid var(--cr);background:transparent;color:var(--cr);cursor:pointer}
+button:hover{background:#22201B}
+button.f{background:var(--cr);color:#000}
+.row{display:grid;gap:8px;grid-template-columns:130px 1fr 90px auto;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
+.row small{grid-column:1/-1;color:var(--mut);word-break:break-all}
+.acts{display:flex;gap:6px}
+.acts button{padding:8px 10px}
+.on{background:var(--cr)!important;color:#000!important}
+#bar{position:fixed;left:0;right:0;bottom:0;background:#000;border-top:2px solid var(--cr);padding:12px 16px}
+#bar .w{display:flex;gap:14px;align-items:center}
+#status{flex:1;font-size:14px}
+.ok{color:var(--cr)}.err{color:#FF8A7A}
+@media(max-width:640px){.row{grid-template-columns:1fr 1fr}.row input{grid-column:1/-1}}
+</style>
+</head>
+<body>
+<div class="w">
+<h1>HECHO · Panel</h1>
+<p class="sub">Agrega videos, cambia etiquetas y publica. La web se actualiza sola, sin tocar código.</p>
+
+<section>
+  <h2>1. Conexión con GitHub</h2>
+  <div class="g">
+    <div><label for="repo">Repositorio (usuario/nombre)</label><input id="repo" placeholder="miusuario/hecho-web"></div>
+    <div><label for="br">Rama</label><input id="br" value="main"></div>
+  </div>
+  <label for="tk">Token de acceso</label><input id="tk" type="password" autocomplete="off" placeholder="github_pat_...">
+  <p class="sub" style="margin:8px 0 12px;font-size:13px">Se guarda solo en este navegador. Usa un token con permiso «Contents: Read and write» limitado a este repositorio.</p>
+  <button class="f" id="load" type="button">Conectar y cargar</button>
+</section>
+
+<section>
+  <h2>2. Agregar video</h2>
+  <label for="u">Enlace de YouTube</label><input id="u" placeholder="https://www.youtube.com/watch?v=... o /shorts/...">
+  <div class="g">
+    <div><label for="t">Etiqueta</label><select id="t"></select></div>
+    <div><label for="f">Formato</label><select id="f"><option value="auto">Detectar solo</option><option value="largo">Largo (horizontal)</option><option value="corto">Short (vertical)</option></select></div>
+  </div>
+  <label for="h">Titular breve (se completa solo con el título del video)</label><input id="h" maxlength="60">
+  <p style="margin-top:14px"><button class="f" id="add" type="button">Agregar al muro</button></p>
+</section>
+
+<section>
+  <h2>3. Videos del muro</h2>
+  <p class="sub" style="margin-bottom:4px">El primero aparece primero. Usa «Destacar» para el video grande de la portada.</p>
+  <div id="list"></div>
+</section>
+
+<section>
+  <h2>4. Ajustes</h2>
+  <label for="tm">Etiquetas disponibles (separadas por coma)</label><input id="tm">
+  <label for="em">Correo de contacto</label><input id="em" type="email">
+  <div class="g" id="soc"></div>
+</section>
+</div>
+
+<div id="bar"><div class="w"><span id="status" role="status">Conecta tu repositorio para empezar.</span><button class="f" id="pub" type="button">Publicar cambios</button></div></div>
+
+<script>
+const $=id=>document.getElementById(id);
+const LS='hecho_admin';
+let data={featured:"",email:"",temas:["Política","Tecnología","Economía","Sociedad"],videos:[],social:[{n:"Instagram",s:"IG",u:""},{n:"TikTok",s:"TT",u:""},{n:"YouTube",s:"YT",u:""},{n:"Facebook",s:"FB",u:""}]};
+let sha=null;
+const say=(m,e)=>{$('status').textContent=m;$('status').className=e?'err':'ok'};
+const vid=u=>{const m=(u||'').match(/(?:v=|youtu\.be\/|shorts\/|embed\/)([\w-]{11})/);return m?m[1]:''};
+const dec=b=>new TextDecoder().decode(Uint8Array.from(atob(b.replace(/\n/g,'')),c=>c.charCodeAt(0)));
+const enc=t=>{const b=new TextEncoder().encode(t);let s='';b.forEach(x=>s+=String.fromCharCode(x));return btoa(s)};
+const cfg=()=>({repo:$('repo').value.trim(),br:$('br').value.trim()||'main',tk:$('tk').value.trim()});
+function gh(method,body){
+  const c=cfg();
+  return fetch('https://api.github.com/repos/'+c.repo+'/contents/videos.json'+(method==='GET'?'?ref='+encodeURIComponent(c.br):''),
+    {method,headers:{Authorization:'Bearer '+c.tk,Accept:'application/vnd.github+json'},body:body?JSON.stringify(body):undefined});
+}
+function mkSel(opts,val){const s=document.createElement('select');opts.forEach(o=>{const e=document.createElement('option');e.value=e.textContent=o;s.appendChild(e)});s.value=val;return s}
+function render(){
+  $('t').replaceChildren(...data.temas.map(t=>{const o=document.createElement('option');o.textContent=o.value=t;return o}));
+  $('tm').value=data.temas.join(', ');$('em').value=data.email||'';
+  $('soc').replaceChildren(...data.social.map(s=>{const d=document.createElement('div'),l=document.createElement('label'),i=document.createElement('input');
+    l.textContent=s.n;i.value=s.u==='#'?'':s.u;i.placeholder='https://...';i.oninput=()=>{s.u=i.value.trim()||'#'};d.append(l,i);return d}));
+  const L=$('list');L.replaceChildren();
+  if(!data.videos.length){L.textContent='Todavía no hay videos.';return}
+  data.videos.forEach((v,i)=>{
+    const r=document.createElement('div');r.className='row';
+    const t=mkSel(data.temas.includes(v.t)?data.temas:[...data.temas,v.t],v.t);t.onchange=()=>v.t=t.value;
+    const h=document.createElement('input');h.value=v.h||'';h.maxLength=60;h.oninput=()=>v.h=h.value;
+    const f=mkSel(['largo','corto'],v.f);f.onchange=()=>v.f=f.value;
+    const a=document.createElement('div');a.className='acts';
+    const mk=(txt,fn,cls)=>{const b=document.createElement('button');b.type='button';b.textContent=txt;if(cls)b.className=cls;b.onclick=fn;return b};
+    const feat=v.u&&data.featured===v.u;
+    a.append(mk(feat?'Destacado':'Destacar',()=>{data.featured=feat?'':v.u;render()},feat?'on':''),
+      mk('↑',()=>{if(i>0){[data.videos[i-1],data.videos[i]]=[data.videos[i],data.videos[i-1]];render()}}),
+      mk('↓',()=>{if(i<data.videos.length-1){[data.videos[i+1],data.videos[i]]=[data.videos[i],data.videos[i+1]];render()}}),
+      mk('✕',()=>{if(confirm('¿Quitar este video?')){data.videos.splice(i,1);render()}}));
+    const s=document.createElement('small');s.textContent=v.u||'Demostración (sin enlace)';
+    r.append(t,h,f,a,s);L.appendChild(r);
+  });
+}
+$('load').onclick=async()=>{
+  const c=cfg();if(!c.repo||!c.tk)return say('Falta el repositorio o el token',1);
+  say('Cargando…');
+  try{
+    const r=await gh('GET');
+    if(r.status===404){sha=null;say('No hay videos.json todavía. Se creará al publicar.');}
+    else if(r.ok){const j=await r.json();sha=j.sha;data=Object.assign(data,JSON.parse(dec(j.content)));say('Cargado. Ya puedes editar.');}
+    else return say('No se pudo conectar ('+r.status+'). Revisa repositorio, rama y token.',1);
+    localStorage.setItem(LS,JSON.stringify(c));render();
+  }catch(e){say('Error de conexión.',1)}
+};
+$('u').onchange=async()=>{
+  const u=$('u').value.trim();if(!vid(u)||$('h').value)return;
+  try{const r=await fetch('https://www.youtube.com/oembed?format=json&url='+encodeURIComponent(u));
+    if(r.ok){const j=await r.json();$('h').value=(j.title||'').slice(0,60)}}catch(e){}
+};
+$('add').onclick=()=>{
+  const u=$('u').value.trim();if(!vid(u))return say('Ese enlace de YouTube no es válido',1);
+  const f=$('f').value==='auto'?(/shorts\//.test(u)?'corto':'largo'):$('f').value;
+  data.videos.unshift({u,t:$('t').value,f,h:$('h').value.trim()});
+  $('u').value=$('h').value='';render();say('Agregado. Falta pulsar «Publicar cambios».');
+};
+$('tm').onchange=()=>{const t=$('tm').value.split(',').map(x=>x.trim()).filter(Boolean);if(t.length){data.temas=t;render()}};
+$('em').oninput=()=>data.email=$('em').value.trim();
+$('pub').onclick=async()=>{
+  const c=cfg();if(!c.repo||!c.tk)return say('Primero conecta tu repositorio',1);
+  say('Publicando…');
+  const body={message:'Actualizar videos desde el panel',content:enc(JSON.stringify(data,null,2)),branch:c.br};
+  if(sha)body.sha=sha;
+  try{
+    const r=await gh('PUT',body);
+    if(r.ok){const j=await r.json();sha=j.content.sha;say('Publicado. La web se actualiza en 1 o 2 minutos.')}
+    else if(r.status===409||r.status===422){say('El archivo cambió en GitHub. Pulsa «Conectar y cargar» y repite.',1)}
+    else say('No se pudo publicar ('+r.status+'). Revisa los permisos del token.',1);
+  }catch(e){say('Error de conexión.',1)}
+};
+try{const c=JSON.parse(localStorage.getItem(LS)||'null');if(c){$('repo').value=c.repo||'';$('br').value=c.br||'main';$('tk').value=c.tk||''}}catch(e){}
+render();
+</script>
+</body>
+</html>
