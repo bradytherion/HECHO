@@ -197,7 +197,7 @@ VIDS.forEach(v=>{
   b.type='button';b.className='tile '+(v.f==='largo'?'long':'');b.dataset.t=v.t;
   b.setAttribute('aria-label','Reproducir: '+(v.h||v.t));
   b.innerHTML='<span class="lab">'+v.t+'</span><span class="play"></span><span class="t">'+(v.h||v.t)+'</span>'+(vid(v.u)?'':'<span class="dm">Demostración</span>');
-  {const tid=vid(v.u);if(tid){const im=new Image();im.className='th';im.alt='';im.loading='lazy';im.src='https://i.ytimg.com/vi/'+tid+'/hqdefault.jpg';b.classList.add('has');b.prepend(im)}}
+  {const tid=vid(v.u);if(tid){const im=new Image();im.className='th';im.alt='';im.loading='lazy';im.onerror=()=>{im.onerror=null;im.src='https://i.ytimg.com/vi/'+tid+'/hqdefault.jpg'};im.src='https://i.ytimg.com/vi/'+tid+'/maxresdefault.jpg';b.classList.add('has');b.prepend(im)}}
   b.addEventListener('click',()=>{
     const id=vid(v.u);if(!id)return;
     const m=document.getElementById('modal'),bx=m.querySelector('.bx');
