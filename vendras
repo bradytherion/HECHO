@@ -1,0 +1,504 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Vendrás</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Manrope:wght@400;500;700;800&display=swap">
+<style>
+/* Concepto: tienda de invitaciones, blanco limpio con tinta casi negra, vino y rosa muy suave.
+   Carrusel de celulares en la portada, catálogo con precios, logo propio (sobre con check)
+   y contacto flotante en forma de píldora, igual que los botones. Un solo tema a propósito. */
+:root{
+  --bg:#FFF9F3;--soft:#FCF1EA;--blush:#F6E8EE;--ink:#17141F;--muted:#625D6E;
+  --accent:#7A2E4F;--gold:#C9A46A;--line:#E8DFE4;--field:#C8BEC6;
+  --serif:'Playfair Display',Georgia,serif;--sans:'Manrope',system-ui,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 84px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--sans);-webkit-font-smoothing:antialiased;font-variant-ligatures:none;font-feature-settings:"liga" 0,"clig" 0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:50}
+h1,h2,h3,p,ul{margin:0}
+ul{padding:0;list-style:none}
+img,svg{max-width:100%}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.wrap{max-width:1160px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+section{padding-block:88px}
+h1,h2{font-family:var(--serif);font-weight:500;letter-spacing:-.01em;text-wrap:balance}
+h2{font-size:clamp(2.1rem,4.8vw,3.3rem);line-height:1.08}
+h1 em,h2 em{font-style:italic;color:var(--accent)}
+.sub{color:var(--muted);max-width:36em;font-size:1.05rem}
+.sec-h{display:flex;flex-direction:column;gap:12px;margin-bottom:32px}
+.btn{min-height:52px;padding:0 28px;border-radius:99px;font:700 15.5px var(--sans);display:inline-flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;border:1.5px solid transparent;cursor:pointer;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn-p{background:var(--accent);color:#fff}
+.btn-w{background:var(--accent);color:#fff}
+.btn-o{background:transparent;border-color:var(--ink);color:var(--ink)}
+.btn-l{background:#fff;color:var(--ink)}
+.btn.sm{min-height:44px;padding:0 22px;font-size:14.5px}
+
+/* logo */
+.logo{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font:800 23px/1 var(--sans);letter-spacing:-.035em}
+.mk{width:34px;height:34px;flex:none}
+.mk-bg{fill:var(--accent)}.mk-ln{stroke:#fff}.mk-bd{fill:var(--gold);stroke:var(--accent)}.mk-ck{stroke:var(--ink)}
+.dark .mk-bg{fill:#fff}.dark .mk-ln{stroke:var(--ink)}.dark .mk-bd{stroke:#fff}
+.dark .logo{color:#fff}
+
+/* cabecera */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:rgba(255,249,243,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.bar{height:68px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.nav{display:none;gap:28px;font-size:14.5px;font-weight:600}
+.nav a{text-decoration:none;padding:10px 0;color:var(--ink)}
+.nav a:hover{color:var(--accent)}
+@media(min-width:900px){.nav{display:flex}}
+
+/* detalles nuevos */
+.sub,.lead{text-wrap:balance}
+#beneficios .feat,#garantias .feat{background:#fff;border:1px solid var(--line);border-radius:22px;padding:24px;box-shadow:0 10px 24px rgba(23,20,31,.05)}
+.cta-b{margin-top:32px}
+.alsoadd{margin-top:36px;font:700 14px var(--sans)}
+.chips2{margin-top:10px;gap:4px 8px}
+.chips2 span{border:0;background:none;border-radius:0;padding:4px 10px 4px 0;font-weight:500;color:var(--muted)}
+.chips2 span::before{content:"+ ";color:var(--accent);font-weight:700}
+@media(max-width:600px){.fab-btn{min-height:48px;padding:0 18px 0 10px;font-size:14px}.fab-btn .mk{width:30px;height:30px}}
+.ey{font:800 12.5px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+#garantias{padding-bottom:40px}
+#precios{padding-top:24px}
+.evs{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.evs a{min-height:44px;display:inline-flex;align-items:center;padding:0 18px;border:1px solid var(--line);background:#fff;border-radius:99px;font-size:14.5px;font-weight:600;text-decoration:none}
+.evs a:hover{border-color:var(--accent);color:var(--accent)}
+.plan{position:relative}
+.badge{position:absolute;top:-13px;left:36px;background:var(--accent);color:#fff;font:700 12.5px var(--sans);padding:5px 14px;border-radius:99px}
+.fnote{font-size:13.5px;color:var(--muted);text-align:center}
+#beneficios{padding-bottom:48px}
+#incluye{padding-top:32px}
+.fi{margin-left:.07em}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--blush);color:var(--accent);border-radius:99px;padding:6px 16px;font:700 13.5px var(--sans);letter-spacing:.02em}
+.chat{margin-top:44px;max-width:400px;background:var(--soft);border:1px solid var(--line);border-radius:24px;padding:20px;display:flex;flex-direction:column;gap:10px}
+.chat-t{font:700 13px var(--sans);color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.cb{max-width:85%;padding:10px 14px;border-radius:16px;font-size:15px;line-height:1.4;display:flex;flex-direction:column;gap:2px}
+.cb small{font-size:11.5px;color:var(--muted);align-self:flex-end}
+.cb b{font-size:13px;color:var(--accent)}
+.cb.in{background:#fff;border:1px solid var(--line);border-top-left-radius:4px;align-self:flex-start}
+.cb.out{background:var(--blush);border-top-right-radius:4px;align-self:flex-end}
+
+/* portada */
+.hero{padding-block:56px 64px;background:linear-gradient(180deg,#FBECE8,#FFF9F3 78%)}
+.hc{display:flex;flex-direction:column;align-items:center;text-align:center;gap:22px;max-width:860px}
+.hero h1{font-size:clamp(2.7rem,6.6vw,4.9rem);line-height:1.04}
+.lead{font-size:1.15rem;color:var(--muted);max-width:34em}
+.cta{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.trust{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:center;font-size:14.5px;font-weight:600;color:var(--muted)}
+.trust li{display:inline-flex;align-items:center;gap:8px}
+.trust li::before{content:"";width:16px;height:16px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 12.5l5 5L20 6.5' fill='none' stroke='%237A2E4F' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat}
+.marq{margin-top:52px;padding-bottom:30px;overflow:hidden;-webkit-mask-image:linear-gradient(to right,transparent,#000 9%,#000 91%,transparent);mask-image:linear-gradient(to right,transparent,#000 9%,#000 91%,transparent)}
+.track{display:flex;width:max-content;animation:slide 70s linear infinite}
+.set{display:flex;gap:24px;padding-right:24px;align-items:flex-start}
+.ph{flex:none;width:200px;height:410px;border:6px solid var(--ink);border-radius:36px;overflow:hidden;background:var(--ink);box-shadow:0 26px 44px rgba(23,20,31,.16)}
+.ph:nth-child(even){margin-top:34px}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* pantallas de invitación */
+.scr{position:relative;width:100%;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;text-align:center;padding:0 14px 18px;gap:6px;color:#fff;container-type:inline-size}
+.scr small{position:relative;z-index:3;font:700 10px/1.2 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:#F6E6C2}
+.scr b{position:relative;z-index:3;font:italic 500 26px/1.05 var(--serif);font-size:13cqw;text-wrap:balance;overflow-wrap:anywhere}
+.scr .dt{position:relative;z-index:3;font-size:12.5px;line-height:1.3;opacity:.95}
+.scr .go{position:relative;z-index:3;margin-top:8px;background:#fff;color:var(--ink);font:700 12px var(--sans);padding:9px 22px;border-radius:99px}
+.art{position:relative;overflow:hidden;background:linear-gradient(160deg,var(--c1),var(--c2));isolation:isolate}
+.art::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(20,16,30,.2),rgba(20,16,30,.55));z-index:1;pointer-events:none}
+.art::before{content:"";position:absolute;z-index:0}
+.art[data-shape=arch]::before{left:22%;right:22%;top:9%;height:44%;border:2px solid rgba(255,255,255,.6);border-radius:999px 999px 0 0}
+.art[data-shape=moon]::before{left:28%;right:28%;top:9%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 30%,#F8E7C0,#D4AF72);box-shadow:0 0 60px rgba(244,226,184,.45)}
+.art[data-shape=halo]::before{left:30%;right:30%;top:11%;aspect-ratio:1;border-radius:50%;border:2px solid rgba(255,255,255,.75);box-shadow:0 0 0 14px rgba(255,255,255,.12),0 0 50px rgba(255,255,255,.3)}
+.art[data-shape=dots]::before{inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.85) 0 2px,transparent 3px),radial-gradient(circle,rgba(255,255,255,.5) 0 1.5px,transparent 2.5px);background-size:46px 46px,29px 29px;background-position:0 0,13px 17px;opacity:.7}
+.art[data-shape=confetti]::before{inset:0;background:radial-gradient(circle at 18% 16%,#FFD23F 0 7px,transparent 8px),radial-gradient(circle at 78% 12%,#fff 0 5px,transparent 6px),radial-gradient(circle at 60% 30%,#7FD6C8 0 6px,transparent 7px),radial-gradient(circle at 30% 38%,#FFB5A8 0 5px,transparent 6px),radial-gradient(circle at 85% 42%,#FFD23F 0 5px,transparent 6px),radial-gradient(circle at 45% 10%,#7FD6C8 0 4px,transparent 5px)}
+.art[data-shape=lines]::before{inset:0;background:repeating-linear-gradient(135deg,rgba(255,255,255,.1) 0 2px,transparent 2px 16px)}
+
+/* catálogo */
+.soft{background:var(--soft)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips button{min-height:44px;padding:0 18px;border-radius:99px;border:1.5px solid var(--field);background:#fff;color:var(--ink);font:600 14.5px var(--sans);cursor:pointer}
+.chips button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:28px 18px;margin-top:28px}
+.tile{display:flex;flex-direction:column;gap:12px;text-decoration:none;min-width:0}
+.tile .scr,.cbox{aspect-ratio:3/4.4;height:auto;border-radius:26px;transition:transform .3s}
+.tile .scr{border:4px solid var(--ink)}
+.tile:hover .scr,.tile:hover .cbox{transform:translateY(-6px)}
+.tm{display:flex;flex-direction:column;gap:2px}
+.tr{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.tr h3{font:700 16.5px/1.25 var(--sans)}
+.pr{font:700 15px var(--sans);white-space:nowrap}
+.tm p{font-size:14px;color:var(--muted)}
+.ask{font:700 14px var(--sans);color:var(--accent);margin-top:4px}
+.cbox{border:2px dashed var(--field);background:var(--blush);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:10px;padding:18px}
+.cbox h3{font:500 24px/1.1 var(--serif)}
+.cbox p{font-size:14px;color:var(--muted)}
+.note{font-size:14px;color:var(--muted);margin-top:26px}
+
+/* qué incluye */
+.feats{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:36px 40px}
+.feat{display:flex;gap:16px;align-items:flex-start;min-width:0}
+.ico{width:46px;height:46px;border-radius:14px;background:var(--blush);color:var(--accent);display:grid;place-items:center;flex:none}
+.feat h3{font:700 17px/1.3 var(--sans);margin-bottom:2px}
+.feat p{font-size:15px;color:var(--muted)}
+.chips2{display:flex;flex-wrap:wrap;gap:8px;margin-top:36px}
+.chips2 span{border:1px solid var(--line);background:#fff;border-radius:99px;padding:9px 16px;font-size:14px;font-weight:600}
+
+/* pasos */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:28px}
+.step{display:flex;flex-direction:column;gap:10px;min-width:0}
+.step i{width:44px;height:44px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font:700 17px var(--sans);font-style:normal}
+.step h3{font:700 18px var(--sans)}
+.step p{font-size:15px;color:var(--muted)}
+
+/* precios */
+.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:20px;max-width:900px}
+.plan{border-radius:28px;padding:36px;display:flex;flex-direction:column;gap:18px;background:#fff;border:1px solid var(--line);min-width:0}
+.plan.d{background:var(--ink);color:#fff;border-color:var(--ink)}
+.plan h3{font:500 30px/1.1 var(--serif)}
+.plan .d1{font-size:15px;color:var(--muted)}
+.plan.d .d1{color:#CFC9D8}
+.amt{font:500 60px/1 var(--serif);letter-spacing:-.02em}
+.plan li{padding:5px 0 5px 28px;font-size:15.5px;position:relative}
+.plan li::before{content:"";position:absolute;left:0;top:11px;width:16px;height:16px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 12.5l5 5L20 6.5' fill='none' stroke='%237A2E4F' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat}
+.plan.d li::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 12.5l5 5L20 6.5' fill='none' stroke='%23C9A46A' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
+.gar{display:flex;flex-wrap:wrap;gap:10px;margin-top:32px}
+.gar span{background:#fff;border:1px solid var(--line);border-radius:99px;padding:10px 18px;font-size:14.5px;font-weight:600}
+
+/* preguntas */
+.faq{max-width:780px}
+details{border-bottom:1px solid var(--line)}
+summary{min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px;cursor:pointer;font:700 17.5px var(--sans);list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font:400 28px var(--sans);color:var(--accent);transition:transform .2s;flex:none}
+details[open] summary::after{transform:rotate(45deg)}
+details p{color:var(--muted);padding:0 0 20px;max-width:40em}
+
+/* cierre y pie */
+.dark{background:var(--ink);color:#F1EEF6}
+.fin-g{display:grid;gap:36px 64px;grid-template-columns:minmax(0,1fr);align-items:center}
+@media(min-width:900px){.fin-g{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+.dark h2{color:#fff}.dark h2 em{color:var(--gold)}.dark .sub{color:#CFC9D8}
+.form{background:#fff;color:var(--ink);border-radius:26px;padding:26px;display:flex;flex-direction:column;gap:14px}
+.fld{display:flex;flex-direction:column;gap:6px;min-width:0}
+.fld label{font:700 13px var(--sans)}
+input,select{width:100%;min-height:48px;padding:0 14px;border-radius:14px;border:1.5px solid var(--field);background:#fff;color:var(--ink);font:400 16px var(--sans)}
+footer{background:var(--ink);color:#CFC9D8;padding-block:0 108px}
+.fcols{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:32px;padding-block:44px;border-top:1px solid rgba(255,255,255,.14)}
+.fcols h3{font:700 14px var(--sans);color:#fff;margin-bottom:8px;letter-spacing:.02em}
+.fcols a{display:block;padding:6px 0;text-decoration:none;color:#CFC9D8;font-size:15px}
+.fcols a:hover{color:#fff}
+.fcols a.logo{display:inline-flex;padding:0;font-size:23px;color:#fff}
+.fbase{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;font-size:13.5px;color:#B3ACBF;border-top:1px solid rgba(255,255,255,.14);padding-top:22px}
+
+/* contacto flotante */
+.fab{position:fixed;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:60;display:flex;flex-direction:column;align-items:flex-end;gap:12px}
+.fab-btn{display:inline-flex;align-items:center;gap:10px;min-height:56px;padding:0 24px 0 12px;border-radius:99px;border:0;background:var(--ink);color:#fff;font:700 15px var(--sans);cursor:pointer;box-shadow:0 14px 30px rgba(23,20,31,.3);transition:transform .15s}
+.fab-btn:hover{transform:translateY(-2px)}
+.fab-btn .mk{width:34px;height:34px}
+.fab-btn .mk-bg{fill:#fff}.fab-btn .mk-ln{stroke:var(--ink)}.fab-btn .mk-bd{stroke:#fff}
+.pop{width:min(330px,calc(100vw - 32px));background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 24px 54px rgba(23,20,31,.3);animation:up .3s both}
+@keyframes up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.pop-h{background:var(--ink);color:#fff;padding:12px 6px 12px 16px;display:flex;align-items:center;gap:12px}
+.pop-h div{display:flex;flex-direction:column;line-height:1.25;flex:1;min-width:0}
+.pop-h small{color:#CFC9D8;font-size:13px}
+.x{width:44px;height:44px;border-radius:50%;border:0;background:none;color:#fff;font-size:26px;cursor:pointer}
+.pop-b{padding:16px;display:flex;flex-direction:column;gap:10px;background:var(--soft)}
+.bub{background:#fff;border:1px solid var(--line);border-radius:4px 16px 16px 16px;padding:12px 14px;font-size:15px}
+.opt{min-height:44px;display:flex;align-items:center;padding:0 16px;border-radius:99px;background:#fff;border:1.5px solid var(--field);text-decoration:none;font-weight:700;font-size:14.5px}
+.opt:hover{border-color:var(--accent);color:var(--accent)}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.marq{overflow-x:auto}}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="mark" viewBox="0 0 36 36">
+    <rect class="mk-bg" width="36" height="36" rx="10"/>
+    <rect class="mk-ln" x="7.5" y="11" width="21" height="15" rx="3" fill="none" stroke-width="2"/>
+    <path class="mk-ln" d="M8.8 12.8L18 20l9.2-7.2" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle class="mk-bd" cx="28" cy="9" r="6.2" stroke-width="2"/>
+    <path class="mk-ck" d="M25.2 9.2l2.2 2.2L31 7" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+</svg>
+
+<header class="top">
+  <div class="wrap bar">
+    <a class="logo" href="#inicio" aria-label="Vendrás, inicio"><svg class="mk" aria-hidden="true"><use href="#mark"/></svg>Vendrás</a>
+    <nav class="nav" aria-label="Principal">
+      <a href="#catalogo">Catálogo</a>
+      <a href="#incluye">Qué incluye</a>
+      <a href="#como">Cómo funciona</a>
+      <a href="#precios">Precios</a>
+      <a href="#preguntas">Preguntas</a>
+    </nav>
+    <a class="btn btn-p sm wa" href="https://wa.me/" data-m="Hola, quiero una invitación web.">Pedir la mía</a>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="inicio">
+  <div class="wrap hc">
+    <span class="eyebrow">Para que celebres con los tuyos</span>
+    <h1>Invita a tu f<span class="fi">iesta</span> con <em>un solo enlace</em></h1>
+    <p class="lead">Tu invitación en un enlace, con tu canción, el mapa y un botón para que confirmen. La compartes por WhatsApp y te llegan las respuestas.</p>
+    <div class="cta">
+      <a class="btn btn-p" href="#catalogo">Ver catálogo</a>
+      <a class="btn btn-o wa" href="https://wa.me/" data-m="Hola, quiero una invitación web.">Pedir por WhatsApp</a>
+    </div>
+    <ul class="trust">
+      <li><b>Desde S/ 29.90</b></li>
+      <li>Lista en menos de 24 h</li>
+      <li>La ves antes de pagar</li>
+    </ul>
+    <div class="evs" role="group" aria-label="Invitaciones por tipo de evento"><a href="#catalogo" data-f="Bodas">Bodas</a><a href="#catalogo" data-f="XV años">XV años</a><a href="#catalogo" data-f="Bautizos">Bautizos</a><a href="#catalogo" data-f="Baby shower">Baby shower</a><a href="#catalogo" data-f="Cumpleaños">Cumpleaños</a><a href="#catalogo" data-f="Graduación">Graduación</a></div>
+  </div>
+  <div class="marq" aria-hidden="true"><div class="track" id="track"></div></div>
+</section>
+
+<section class="soft" id="catalogo">
+  <div class="wrap">
+    <div class="sec-h">
+      <span class="ey">Elige tu diseño</span>
+      <h2>Catálogo de <em>invitaciones</em></h2>
+      <p class="sub">Toca el diseño que te guste y te abrimos WhatsApp con el mensaje listo. Todos cuestan S/ 29.90 y los ves terminados antes de pagar.</p>
+    </div>
+    <div class="chips" id="catChips" role="group" aria-label="Filtrar por evento"></div>
+    <div class="tiles" id="tiles"></div>
+    <p class="note">Son diseños de ejemplo. Cada invitación se llena con tus nombres, fecha, lugar, fotos y canción.</p>
+  </div>
+</section>
+
+<section id="beneficios">
+  <div class="wrap">
+    <div class="sec-h">
+      <span class="ey">Por qué un enlace</span>
+      <h2>Lo que ganas al <em>invitar con un enlace</em></h2>
+    </div>
+    <div class="feats">
+      <div class="feat"><div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h8l4 4v14H7z"/><path d="M15 3v4h4"/></svg></div><div><h3>No imprimes ni repartes</h3><p>Un solo enlace llega a todos por WhatsApp, sin tarjetas ni ir casa por casa.</p></div></div>
+      <div class="feat"><div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/></svg></div><div><h3>Sabes quién viene</h3><p>Las confirmaciones te llegan a tu WhatsApp, sin llamar uno por uno.</p></div></div>
+      <div class="feat"><div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div><div><h3>Nadie se pierde</h3><p>Con un toque abren el mapa y ven la fecha, la hora y el programa.</p></div></div>
+      <div class="feat"><div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></svg></div><div><h3>Sin instalar nada</h3><p>Se abre directo en el celular de tus invitados, como cualquier enlace.</p></div></div>
+    </div>
+    <div class="cta-b"><a class="btn btn-p" href="#catalogo">Ver catálogo</a></div>
+  </div>
+</section>
+
+<section id="incluye">
+  <div class="wrap">
+    <div class="sec-h">
+      <span class="ey">Qué incluye</span>
+      <h2>Todo lo que tu invitado <em>necesita saber</em></h2>
+      <p class="sub">Más que una imagen para reenviar. Tu invitación es una página con todo en un solo lugar.</p>
+    </div>
+    <div class="feats">
+      <div class="feat"><div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></svg></div><div><h3>Tu canción</h3><p>Suena cuando tu invitado abre la invitación.</p></div></div>
+      <div class="feat"><div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div><div><h3>Mapa del lugar</h3><p>Un toque y se abre la ruta en Google Maps.</p></div></div>
+      <div class="feat"><div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div><h3>Cuenta regresiva</h3><p>Los días y horas que faltan para tu fiesta.</p></div></div>
+      <div class="feat"><div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg></div><div><h3>Confirmación por WhatsApp</h3><p>El invitado toca ¡Iré! y te llega el mensaje ya escrito.</p></div></div>
+      <div class="feat"><div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg></div><div><h3>Programa del evento</h3><p>Horarios y momentos del día en una lista clara.</p></div></div>
+      <div class="feat"><div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M21 17l-5-5-9 7"/></svg></div><div><h3>Galería de fotos</h3><p>Tus fotos dentro de la invitación.</p></div></div>
+    </div>
+    <p class="alsoadd">También puedes agregar:</p>
+    <div class="chips2">
+      <span>Dress code</span><span>Mesa de regalos</span><span>Padrinos y familia</span><span>Hospedaje y transporte</span><span>Estacionamiento</span><span>Agendar la fecha</span><span>Mensaje especial</span>
+    </div>
+  </div>
+</section>
+
+<section class="soft" id="como">
+  <div class="wrap">
+    <div class="sec-h"><span class="ey">Paso a paso</span><h2>De la idea al enlace en <em>cuatro pasos</em></h2></div>
+    <div class="steps">
+      <div class="step"><i>1</i><h3>Elige tu diseño</h3><p>Recorre el catálogo por evento y toca el que te guste.</p></div>
+      <div class="step"><i>2</i><h3>Envía tus datos</h3><p>Nombres, fecha, lugar, fotos y tu canción, por WhatsApp.</p></div>
+      <div class="step"><i>3</i><h3>Mira tu vista previa</h3><p>La ves con marca de agua y pides los ajustes que quieras.</p></div>
+      <div class="step"><i>4</i><h3>Paga y comparte</h3><p>Pagas con Yape, Plin o BCP, recibes tu enlace final y lo envías por WhatsApp.</p></div>
+    </div>
+    <p class="note">Solo necesitas tener a la mano: nombres, fecha, hora, dirección, fotos y tu canción. Si te falta algo, te ayudamos.</p>
+  </div>
+</section>
+
+<section id="garantias">
+  <div class="wrap">
+    <div class="sec-h">
+      <span class="ey">Compra tranquila</span>
+      <h2>Tu tranquilidad, <em>por delante</em></h2>
+    </div>
+    <div class="feats">
+      <div class="feat"><div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></div><div><h3>La ves antes de pagar</h3><p>Te mostramos tu invitación terminada y pagas solo cuando te guste.</p></div></div>
+      <div class="feat"><div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div><h3>Lista en menos de 24 h</h3><p>Desde que nos envías tus datos, fotos y canción.</p></div></div>
+      <div class="feat"><div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1-4L16 5l3 3L8 19z"/></svg></div><div><h3>Si nos equivocamos, lo corregimos gratis</h3><p>Al instante, y no cuenta como uno de tus cambios.</p></div></div>
+      <div class="feat"><div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></div><div><h3>Cambiar fecha, hora o lugar no cuesta</h3><p>Lo actualizamos hasta el día de tu evento, en el mismo enlace.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="precios">
+  <div class="wrap">
+    <div class="sec-h">
+      <span class="ey">Precios</span>
+      <h2>Un solo pago, <em>sin costo por invitado</em></h2>
+    </div>
+    <div class="plans">
+      <div class="plan">
+        <span class="badge">Recomendado</span>
+        <div><h3>De catálogo</h3><p class="d1">Eliges un diseño y lo llenamos con tus datos.</p></div>
+        <div class="amt">S/ 29.90</div>
+        <ul>
+          <li>Diseño del catálogo</li>
+          <li>Música, cuenta regresiva y mapa</li>
+          <li>Confirmación por WhatsApp</li>
+          <li>Enlace personal</li>
+          <li>1 cambio antes de pagar</li>
+        </ul>
+        <a class="btn btn-o wa" href="https://wa.me/" data-m="Hola, quiero la invitación de catálogo (S/ 29.90).">Elegir esta</a>
+      </div>
+      <div class="plan d">
+        <div><h3>Personalizada</h3><p class="d1">La creamos desde cero con tu temática y tus colores.</p></div>
+        <div class="amt">S/ 39.90</div>
+        <ul>
+          <li>Todo lo del plan de catálogo</li>
+          <li>Diseño desde cero</li>
+          <li>Cambios ilimitados antes de pagar</li>
+          <li>1 cambio después de pagar</li>
+        </ul>
+        <a class="btn btn-l wa" href="https://wa.me/" data-m="Hola, quiero la invitación personalizada (S/ 39.90).">Elegir esta</a>
+      </div>
+    </div>
+    <p class="note">Pagas con Yape, Plin o BCP, después de aprobar tu vista previa.</p>
+  </div>
+</section>
+
+<section class="soft" id="preguntas">
+  <div class="wrap faq">
+    <div class="sec-h"><span class="ey">Dudas</span><h2>Preguntas <em>frecuentes</em></h2></div>
+    <details><summary>¿Qué necesito enviarles?</summary><p>Los nombres, la fecha y la hora, la dirección del lugar, tus fotos favoritas y la canción que quieres que suene. Si te falta algo, te ayudamos.</p></details>
+    <details><summary>¿Mis invitados instalan algo?</summary><p>No. Abren el enlace desde el navegador del celular.</p></details>
+    <details><summary>¿Cómo confirman su asistencia?</summary><p>Con un botón que abre un chat contigo con el mensaje ya escrito.</p></details>
+    <details><summary>¿Puedo poner mi canción?</summary><p>Sí. Tú nos la envías y suena cuando se abre la invitación.</p></details>
+    <details><summary>¿Cuánto demora?</summary><p>En catálogo, la meta es menos de 24 horas desde que recibimos tus datos. En personalizada acordamos la fecha al empezar.</p></details>
+    <details><summary>¿Cuándo pago?</summary><p>Solo después de aprobar tu vista previa. Puedes pagar con Yape, Plin o BCP.</p></details>
+    <details><summary>¿Y si cambia el lugar o la hora?</summary><p>Lo actualizamos sin costo en el mismo enlace hasta el día de tu evento.</p></details>
+    <details><summary>¿Hay un límite de invitados?</summary><p>No. Compartes tu enlace con todas las personas que quieras.</p></details>
+  </div>
+</section>
+
+<section class="dark" id="empezar">
+  <div class="wrap fin-g">
+    <div class="sec-h" style="margin:0">
+      <h2>¿Vendrás a <em>celebrar</em> con nosotros?</h2>
+      <p class="sub">Cuéntanos de tu evento y mira tu invitación terminada antes de pagar.</p>
+    </div>
+    <form class="form" id="f">
+      <div class="fld"><label for="fn">Tu nombre</label><input id="fn" type="text" placeholder="Ana" autocomplete="name"></div>
+      <div class="fld"><label for="fe">Tipo de evento</label>
+        <select id="fe"><option>Boda</option><option>XV años</option><option>Bautizo</option><option>Primera comunión</option><option>Baby shower</option><option>Revelación de género</option><option>Cumpleaños</option><option>1er añito</option><option>Infantil</option><option>Graduación</option><option>Evento corporativo</option><option>Otro</option></select></div>
+      <div class="fld"><label for="fd">Fecha del evento</label><input id="fd" type="date"></div>
+      <button class="btn btn-w" type="submit">Enviar por WhatsApp</button>
+      <p class="fnote">No pagas nada hasta aprobar tu vista previa.</p>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer class="dark">
+  <div class="wrap">
+    <div class="fcols">
+      <div>
+        <a class="logo" href="#inicio" aria-label="Vendrás, inicio"><svg class="mk" aria-hidden="true"><use href="#mark"/></svg>Vendrás</a>
+        <p style="margin-top:12px;font-size:15px;max-width:22em">Invitaciones web que se comparten por WhatsApp.</p>
+      </div>
+      <div>
+        <h3>Producto</h3>
+        <a href="#catalogo">Catálogo</a><a href="#incluye">Qué incluye</a><a href="#como">Cómo funciona</a><a href="#precios">Precios</a>
+      </div>
+      <div>
+        <h3>Eventos</h3>
+        <a href="#catalogo" data-f="Bodas">Bodas</a><a href="#catalogo" data-f="XV años">XV años</a><a href="#catalogo" data-f="Bautizos">Bautizos</a><a href="#catalogo" data-f="Baby shower">Baby shower</a><a href="#catalogo" data-f="Cumpleaños">Cumpleaños</a>
+      </div>
+      <div>
+        <h3>Ayuda</h3>
+        <a href="#preguntas">Preguntas frecuentes</a><a class="wa" href="https://wa.me/" data-m="Hola, tengo una duda sobre las invitaciones.">Escríbenos por WhatsApp</a>
+      </div>
+    </div>
+    <div class="fbase"><span>Propuesta de ejemplo. Nombre y precios por confirmar.</span><span>Vendrás · Invitaciones web</span></div>
+  </div>
+</footer>
+
+<div class="fab" id="fab">
+  <div class="pop" id="pop" role="dialog" aria-label="Contacto por WhatsApp" hidden>
+    <div class="pop-h">
+      <svg class="mk" aria-hidden="true" style="width:36px;height:36px"><use href="#mark"/></svg>
+      <div><b>Vendrás</b><small>Escríbenos por WhatsApp</small></div>
+      <button class="x" id="popX" type="button" aria-label="Cerrar">×</button>
+    </div>
+    <div class="pop-b">
+      <p class="bub">Hola, ¿qué vas a celebrar? Elige una opción y abrimos el chat con el mensaje listo.</p>
+      <a class="opt wa" href="https://wa.me/" data-m="Hola, quiero una invitación de catálogo (S/ 29.90).">Quiero una de catálogo · S/ 29.90</a>
+      <a class="opt wa" href="https://wa.me/" data-m="Hola, quiero una invitación personalizada (S/ 39.90).">Quiero una personalizada · S/ 39.90</a>
+      <a class="opt wa" href="https://wa.me/" data-m="Hola, tengo una duda sobre las invitaciones.">Tengo una duda</a>
+    </div>
+  </div>
+  <button class="fab-btn" id="fabBtn" type="button" aria-expanded="false" aria-controls="pop"><svg class="mk" aria-hidden="true"><use href="#mark"/></svg>Escríbenos</button>
+</div>
+
+<script>
+(function(){
+  var NUM="";/* tu número con código de país, ej. 519XXXXXXXX */
+  function wa(t){return 'https://wa.me/'+NUM+'?text='+encodeURIComponent(t)}
+  function bind(){document.querySelectorAll('.wa[data-m]').forEach(function(a){a.href=wa(a.dataset.m);a.target='_blank';a.rel='noopener'})}
+  function $(id){return document.getElementById(id)}
+
+  /* nombre, categoría, forma, color 1, color 2, etiqueta, nombres, fecha */
+  var D=[
+    ['Olivar','Bodas','arch','#5E6D3E','#34401F','Nos casamos','Ana &amp; Diego','5 de junio'],
+    ['Candelabro','Bodas','lines','#4B4A8F','#232149','Nos casamos','Sofía &amp; Mateo','12 de septiembre'],
+    ['Medianoche','XV años','moon','#4A3A9A','#211C5C','Mis quince','Lucía','12 de marzo'],
+    ['Rosa eterna','XV años','arch','#A8426A','#6E2145','Mis quince','Valeria','4 de julio'],
+    ['Primera luz','Bautizos','halo','#4F86B5','#254F7C','Mi bautizo','Mateo','18 de abril'],
+    ['Paloma','Bautizos','halo','#7F96BF','#425A87','Mi bautizo','Emma','2 de mayo'],
+    ['Pequeña llegada','Baby shower','dots','#C0708F','#8A3D5E','Ya viene','Baby Noor','24 de abril'],
+    ['Luna y estrellas','Baby shower','moon','#4A5AA8','#252F72','Bienvenido','Baby Leo','15 de mayo'],
+    ['Globos','Cumpleaños','confetti','#D45A44','#A52F22','¡Estás invitado!','Santi cumple 5','23 de enero'],
+    ['Misión espacial','Cumpleaños','dots','#3A3A9A','#1F6C9A','Misión cumpleaños','Thiago cumple 7','30 de enero'],
+    ['Toga dorada','Graduación','lines','#3A3A8A','#7A5C22','Nos graduamos','Promoción 2026','12 de diciembre'],
+    ['Gala','Corporativo','lines','#1F5F70','#0F3340','Gala anual','Aniversario 25','20 de noviembre']
+  ];
+  function scr(x){return '<div class="scr art" data-shape="'+x[2]+'" style="--c1:'+x[3]+';--c2:'+x[4]+'"><small>'+x[5]+'</small><b>'+x[6]+'</b><span class="dt">'+x[7]+'</span><span class="go">¡Iré!</span></div>'}
+
+  /* carrusel de celulares */
+  var set='<div class="set">'+[0,2,4,6,8,10].map(function(i){return '<div class="ph">'+scr(D[i])+'</div>'}).join('')+'</div>';
+  $('track').innerHTML=set+set;
+
+  /* catálogo */
+  var cats=['Todos'].concat(D.map(function(x){return x[1]}).filter(function(v,i,a){return a.indexOf(v)===i})),fc='Todos';
+  function drawCat(){
+    var c=$('catChips');c.innerHTML='';
+    cats.forEach(function(k){var b=document.createElement('button');b.type='button';b.textContent=k;b.setAttribute('aria-pressed',k===fc);b.onclick=function(){fc=k;drawCat()};c.appendChild(b)});
+    var html=D.filter(function(x){return fc==='Todos'||x[1]===fc}).map(function(x){
+      return '<a class="tile wa" href="https://wa.me/" data-m="Hola, quiero la invitación «'+x[0]+'» ('+x[1]+')." aria-label="Pedir «'+x[0]+'» por WhatsApp">'+scr(x)+
+        '<div class="tm"><div class="tr"><h3>'+x[0]+'</h3><span class="pr">S/ 29.90</span></div><p>'+x[1]+'</p><span class="ask">Pedir por WhatsApp →</span></div></a>'}).join('');
+    html+='<a class="tile wa" href="https://wa.me/" data-m="Hola, quiero una invitación personalizada (S/ 39.90)."><div class="cbox"><h3>¿No ves el tuyo?</h3><p>Lo diseñamos desde cero con tu temática y tus colores.</p></div>'+
+      '<div class="tm"><div class="tr"><h3>Personalizada</h3><span class="pr">S/ 39.90</span></div><p>Diseño a tu medida</p><span class="ask">Pedir por WhatsApp →</span></div></a>';
+    $('tiles').innerHTML=html;
+    bind();
+  }
+  document.querySelectorAll('[data-f]').forEach(function(a){a.addEventListener('click',function(){fc=a.dataset.f;drawCat()})});
+
+  /* formulario final */
+  function fmt(v){var p=(v||'').split('-');if(p.length!==3)return 'por definir';var d=new Date(+p[0],+p[1]-1,+p[2]);return d.toLocaleDateString('es-PE',{day:'numeric',month:'long',year:'numeric'})}
+  $('f').addEventListener('submit',function(e){e.preventDefault();
+    var n=$('fn').value.trim()||'[sin nombre]';
+    window.open(wa('Hola, quiero una invitación web. Mi nombre: '+n+'. Evento: '+$('fe').value+'. Fecha: '+fmt($('fd').value)+'.'),'_blank','noopener')});
+
+  /* botón flotante */
+  var pop=$('pop'),fb=$('fabBtn');
+  function setPop(o){pop.hidden=!o;fb.setAttribute('aria-expanded',o)}
+  fb.onclick=function(){setPop(pop.hidden)};
+  $('popX').onclick=function(){setPop(false);fb.focus()};
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!pop.hidden){setPop(false);fb.focus()}});
+
+  drawCat();bind();
+})();
+</script>
+
+</body></html>
