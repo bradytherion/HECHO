@@ -51,49 +51,6 @@ h1 em,h2 em{font-style:italic;color:var(--accent)}
 .nav a:hover{color:var(--accent)}
 @media(min-width:900px){.nav{display:flex}}
 
-/* detalles nuevos */
-#beneficios .feats,#garantias .feats{grid-template-columns:minmax(0,1fr);gap:20px}
-@media(min-width:700px){#beneficios .feats,#garantias .feats{grid-template-columns:repeat(2,minmax(0,1fr))}}
-#beneficios .feat,#garantias .feat{transition:transform .2s,box-shadow .2s}
-#beneficios .feat:hover,#garantias .feat:hover{transform:translateY(-3px);box-shadow:0 16px 32px rgba(122,46,79,.12)}
-.step i{background:var(--accent);box-shadow:0 0 0 6px var(--blush)}
-.need{display:flex;align-items:center;gap:16px;margin-top:40px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:18px 22px;font-size:16px}
-.need .ico{width:44px;height:44px}
-.need p{max-width:46em}
-@media(min-width:1040px){.step{position:relative}.step:not(:last-child)::after{content:"";position:absolute;top:22px;left:62px;right:-16px;border-top:2px dashed var(--field)}}
-.plans{max-width:none}
-.plan .btn{margin-top:auto}
-.plan.d .badge{background:var(--gold);color:var(--ink)}
-.pay-n{font-size:16px;font-weight:600;color:var(--ink)}
-.sub,.lead{text-wrap:balance}
-#beneficios .feat,#garantias .feat{background:#fff;border:1px solid var(--line);border-radius:22px;padding:24px;box-shadow:0 10px 24px rgba(23,20,31,.05)}
-.cta-b{margin-top:32px}
-.alsoadd{margin-top:36px;font:700 14px var(--sans)}
-.chips2{margin-top:10px;gap:4px 8px}
-.chips2 span{border:0;background:none;border-radius:0;padding:4px 10px 4px 0;font-weight:500;color:var(--muted)}
-.chips2 span::before{content:"+ ";color:var(--accent);font-weight:700}
-@media(max-width:600px){.fab-btn{min-height:48px;padding:0 18px 0 10px;font-size:14px}.fab-btn .mk{width:30px;height:30px}}
-.ey{font:800 12.5px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
-#garantias{padding-bottom:40px}
-#precios{padding-top:24px}
-.evs{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
-.evs a{min-height:44px;display:inline-flex;align-items:center;padding:0 18px;border:1px solid var(--line);background:#fff;border-radius:99px;font-size:14.5px;font-weight:600;text-decoration:none}
-.evs a:hover{border-color:var(--accent);color:var(--accent)}
-.plan{position:relative}
-.badge{position:absolute;top:-13px;left:36px;background:var(--accent);color:#fff;font:700 12.5px var(--sans);padding:5px 14px;border-radius:99px}
-.fnote{font-size:13.5px;color:var(--muted);text-align:center}
-#beneficios{padding-bottom:48px}
-#incluye{padding-top:32px}
-.fi{margin-left:.07em}
-.eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--blush);color:var(--accent);border-radius:99px;padding:6px 16px;font:700 13.5px var(--sans);letter-spacing:.02em}
-.chat{margin-top:44px;max-width:400px;background:var(--soft);border:1px solid var(--line);border-radius:24px;padding:20px;display:flex;flex-direction:column;gap:10px}
-.chat-t{font:700 13px var(--sans);color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
-.cb{max-width:85%;padding:10px 14px;border-radius:16px;font-size:15px;line-height:1.4;display:flex;flex-direction:column;gap:2px}
-.cb small{font-size:11.5px;color:var(--muted);align-self:flex-end}
-.cb b{font-size:13px;color:var(--accent)}
-.cb.in{background:#fff;border:1px solid var(--line);border-top-left-radius:4px;align-self:flex-start}
-.cb.out{background:var(--blush);border-top-right-radius:4px;align-self:flex-end}
-
 /* portada */
 .hero{padding-block:56px 64px;background:linear-gradient(180deg,#FBECE8,#FFF9F3 78%)}
 .hc{display:flex;flex-direction:column;align-items:center;text-align:center;gap:22px;max-width:860px}
@@ -220,6 +177,50 @@ footer{background:var(--ink);color:#CFC9D8;padding-block:0 108px}
 .opt{min-height:44px;display:flex;align-items:center;padding:0 16px;border-radius:99px;background:#fff;border:1.5px solid var(--field);text-decoration:none;font-weight:700;font-size:14.5px}
 .opt:hover{border-color:var(--accent);color:var(--accent)}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.marq{overflow-x:auto}}
+/* detalles nuevos */
+#beneficios .feats,#garantias .feats{grid-template-columns:minmax(0,1fr);gap:20px}
+@media(min-width:700px){#beneficios .feats,#garantias .feats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+#beneficios .feat,#garantias .feat{transition:transform .2s,box-shadow .2s}
+#beneficios .feat:hover,#garantias .feat:hover{transform:translateY(-3px);box-shadow:0 16px 32px rgba(122,46,79,.12)}
+.step i{background:var(--accent);box-shadow:0 0 0 6px var(--blush)}
+.need{display:flex;align-items:center;gap:16px;margin-top:40px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:18px 22px;font-size:16px}
+.need .ico{width:44px;height:44px}
+.need p{max-width:46em}
+@media(min-width:1040px){.step{position:relative}.step:not(:last-child)::after{content:"";position:absolute;top:22px;left:62px;right:-16px;border-top:2px dashed var(--field)}}
+.plans{max-width:none}
+.plan.h{background:var(--blush);border:1.5px dashed var(--field)}
+.plan h3{margin-bottom:8px}
+.plan .btn{margin-top:auto}
+.plan.d .badge{background:var(--gold);color:var(--ink)}
+.pay-n{font-size:16px;font-weight:600;color:var(--ink)}
+.sub,.lead{text-wrap:balance}
+#beneficios .feat,#garantias .feat{background:#fff;border:1px solid var(--line);border-radius:22px;padding:24px;box-shadow:0 10px 24px rgba(23,20,31,.05)}
+.cta-b{margin-top:32px}
+.alsoadd{margin-top:36px;font:700 14px var(--sans)}
+.chips2{margin-top:10px;gap:4px 8px}
+.chips2 span{border:0;background:none;border-radius:0;padding:4px 10px 4px 0;font-weight:500;color:var(--muted)}
+.chips2 span::before{content:"+ ";color:var(--accent);font-weight:700}
+@media(max-width:600px){.fab-btn{min-height:48px;padding:0 18px 0 10px;font-size:14px}.fab-btn .mk{width:30px;height:30px}}
+.ey{font:800 12.5px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+#garantias{padding-bottom:40px}
+#precios{padding-top:24px}
+.evs{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.evs a{min-height:44px;display:inline-flex;align-items:center;padding:0 18px;border:1px solid var(--line);background:#fff;border-radius:99px;font-size:14.5px;font-weight:600;text-decoration:none}
+.evs a:hover{border-color:var(--accent);color:var(--accent)}
+.plan{position:relative}
+.badge{position:absolute;top:-13px;left:36px;background:var(--accent);color:#fff;font:700 12.5px var(--sans);padding:5px 14px;border-radius:99px}
+.fnote{font-size:13.5px;color:var(--muted);text-align:center}
+#beneficios{padding-bottom:48px}
+#incluye{padding-top:32px}
+.fi{margin-left:.07em}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--blush);color:var(--accent);border-radius:99px;padding:6px 16px;font:700 13.5px var(--sans);letter-spacing:.02em}
+.chat{margin-top:44px;max-width:400px;background:var(--soft);border:1px solid var(--line);border-radius:24px;padding:20px;display:flex;flex-direction:column;gap:10px}
+.chat-t{font:700 13px var(--sans);color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.cb{max-width:85%;padding:10px 14px;border-radius:16px;font-size:15px;line-height:1.4;display:flex;flex-direction:column;gap:2px}
+.cb small{font-size:11.5px;color:var(--muted);align-self:flex-end}
+.cb b{font-size:13px;color:var(--accent)}
+.cb.in{background:#fff;border:1px solid var(--line);border-top-left-radius:4px;align-self:flex-start}
+.cb.out{background:var(--blush);border-top-right-radius:4px;align-self:flex-end}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -376,8 +377,17 @@ footer{background:var(--ink);color:#CFC9D8;padding-block:0 108px}
         </ul>
         <a class="btn btn-o wa" href="https://wa.me/" data-m="Hola, quiero la invitación personalizada (S/ 39.90).">Elegir esta</a>
       </div>
+      <div class="plan h">
+        <div><h3>¿Cuál elegir?</h3><p class="d1">Cuéntanos tu evento y te decimos cuál te conviene.</p></div>
+        <ul>
+          <li>Sin costo por invitado</li>
+          <li>La ves antes de pagar</li>
+          <li>Pagas con Yape, Plin o BCP, tras aprobar tu vista previa</li>
+        </ul>
+        <a class="btn btn-w wa" href="https://wa.me/" data-m="Hola, no sé cuál invitación elegir. ¿Me ayudan?">Preguntar por WhatsApp</a>
+      </div>
     </div>
-    <p class="note pay-n">Pagas con Yape, Plin o BCP, después de aprobar tu vista previa.</p>
+    
   </div>
 </section>
 
