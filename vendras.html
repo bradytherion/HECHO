@@ -52,6 +52,19 @@ h1 em,h2 em{font-style:italic;color:var(--accent)}
 @media(min-width:900px){.nav{display:flex}}
 
 /* detalles nuevos */
+#beneficios .feats,#garantias .feats{grid-template-columns:minmax(0,1fr);gap:20px}
+@media(min-width:700px){#beneficios .feats,#garantias .feats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+#beneficios .feat,#garantias .feat{transition:transform .2s,box-shadow .2s}
+#beneficios .feat:hover,#garantias .feat:hover{transform:translateY(-3px);box-shadow:0 16px 32px rgba(122,46,79,.12)}
+.step i{background:var(--accent);box-shadow:0 0 0 6px var(--blush)}
+.need{display:flex;align-items:center;gap:16px;margin-top:40px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:18px 22px;font-size:16px}
+.need .ico{width:44px;height:44px}
+.need p{max-width:46em}
+@media(min-width:1040px){.step{position:relative}.step:not(:last-child)::after{content:"";position:absolute;top:22px;left:62px;right:-16px;border-top:2px dashed var(--field)}}
+.plans{max-width:none}
+.plan .btn{margin-top:auto}
+.plan.d .badge{background:var(--gold);color:var(--ink)}
+.pay-n{font-size:16px;font-weight:600;color:var(--ink)}
 .sub,.lead{text-wrap:balance}
 #beneficios .feat,#garantias .feat{background:#fff;border:1px solid var(--line);border-radius:22px;padding:24px;box-shadow:0 10px 24px rgba(23,20,31,.05)}
 .cta-b{margin-top:32px}
@@ -313,7 +326,7 @@ footer{background:var(--ink);color:#CFC9D8;padding-block:0 108px}
       <div class="step"><i>3</i><h3>Mira tu vista previa</h3><p>La ves con marca de agua y pides los ajustes que quieras.</p></div>
       <div class="step"><i>4</i><h3>Paga y comparte</h3><p>Pagas con Yape, Plin o BCP, recibes tu enlace final y lo envías por WhatsApp.</p></div>
     </div>
-    <p class="note">Solo necesitas tener a la mano: nombres, fecha, hora, dirección, fotos y tu canción. Si te falta algo, te ayudamos.</p>
+    <div class="need"><div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11M4 6l1 1 2-2M4 12l1 1 2-2M4 18l1 1 2-2"/></svg></div><p><b>Solo necesitas tener a la mano:</b> nombres, fecha, hora, dirección, fotos y tu canción. Si te falta algo, te ayudamos.</p></div>
   </div>
 </section>
 
@@ -339,7 +352,7 @@ footer{background:var(--ink);color:#CFC9D8;padding-block:0 108px}
       <h2>Un solo pago, <em>sin costo por invitado</em></h2>
     </div>
     <div class="plans">
-      <div class="plan">
+      <div class="plan d">
         <span class="badge">Recomendado</span>
         <div><h3>De catálogo</h3><p class="d1">Eliges un diseño y lo llenamos con tus datos.</p></div>
         <div class="amt">S/ 29.90</div>
@@ -350,9 +363,9 @@ footer{background:var(--ink);color:#CFC9D8;padding-block:0 108px}
           <li>Enlace personal</li>
           <li>1 cambio antes de pagar</li>
         </ul>
-        <a class="btn btn-o wa" href="https://wa.me/" data-m="Hola, quiero la invitación de catálogo (S/ 29.90).">Elegir esta</a>
+        <a class="btn btn-l wa" href="https://wa.me/" data-m="Hola, quiero la invitación de catálogo (S/ 29.90).">Elegir esta</a>
       </div>
-      <div class="plan d">
+      <div class="plan">
         <div><h3>Personalizada</h3><p class="d1">La creamos desde cero con tu temática y tus colores.</p></div>
         <div class="amt">S/ 39.90</div>
         <ul>
@@ -361,10 +374,10 @@ footer{background:var(--ink);color:#CFC9D8;padding-block:0 108px}
           <li>Cambios ilimitados antes de pagar</li>
           <li>1 cambio después de pagar</li>
         </ul>
-        <a class="btn btn-l wa" href="https://wa.me/" data-m="Hola, quiero la invitación personalizada (S/ 39.90).">Elegir esta</a>
+        <a class="btn btn-o wa" href="https://wa.me/" data-m="Hola, quiero la invitación personalizada (S/ 39.90).">Elegir esta</a>
       </div>
     </div>
-    <p class="note">Pagas con Yape, Plin o BCP, después de aprobar tu vista previa.</p>
+    <p class="note pay-n">Pagas con Yape, Plin o BCP, después de aprobar tu vista previa.</p>
   </div>
 </section>
 
