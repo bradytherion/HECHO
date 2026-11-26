@@ -143,13 +143,6 @@ em{font-style:normal;color:var(--accent)}
 .facts{display:flex;flex-wrap:wrap;gap:8px 22px;justify-content:center;font-size:13.5px;font-weight:500;color:var(--muted);margin-top:clamp(22px,3vw,28px)}
 .facts li{display:inline-flex;align-items:center;gap:9px}
 .facts li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--gold);flex:none}
-.hfoot{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:0;text-align:center;margin-top:clamp(22px,3vw,34px)}
-.cap{font-size:12px;color:var(--muted);opacity:.85}
-.evl{display:flex;flex-wrap:wrap;gap:0 2px;justify-content:center;font-size:14px}
-.evl a{padding:12px 10px;text-decoration:none;font-weight:500;color:var(--muted);position:relative}
-.evl a::after{content:"";position:absolute;left:10px;right:10px;bottom:8px;height:1px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease)}
-.evl a:hover{color:var(--accent)}
-.evl a:hover::after{transform:scaleX(1)}
 
 /* invitaciones flotantes del hero (decorativas) */
 .fl{--w:clamp(104px,28vw,176px);position:relative;z-index:1;display:flex;justify-content:center;align-items:flex-end;margin-bottom:clamp(40px,7vw,56px)}
@@ -179,7 +172,11 @@ em{font-style:normal;color:var(--accent)}
 @media(max-width:520px){
   .hero .cta{flex-direction:column;align-items:stretch;width:100%;max-width:340px}
   .hero .btn-o{justify-content:center}
-  .hero .btn-p{justify-content:space-between}
+  /* Botón principal: el texto se centra sobre el ancho completo del botón (igual que «Cómo funciona»).
+     El círculo con la flecha sale del flujo y queda fijo a la derecha (9 px del borde, centrado en vertical).
+     El relleno lateral es simétrico y reserva el espacio del círculo, así el texto nunca lo pisa. */
+  .hero .btn-p{justify-content:center;padding:0 56px}
+  .hero .btn-p .btn-ic{position:absolute;right:9px;top:0;bottom:0;margin:auto 0}
 }
 
 /* portadas (arte de ejemplo y portadas reales) */
@@ -239,9 +236,19 @@ em{font-style:normal;color:var(--accent)}
 .demo:hover{color:var(--accent);text-underline-offset:7px}
 .demo.off{color:var(--muted);text-decoration:none;cursor:not-allowed;font-weight:500}
 .demo.off small{font-weight:500;font-size:12px;opacity:.85}
-.card.custom .cover{background:var(--blush);border:1.5px dashed var(--field);box-shadow:none;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:12px;padding:22px}
-.card.custom .cover h3{font:600 clamp(19px,2vw,22px)/1.2 var(--sans);letter-spacing:-.02em}
-.card.custom .cover p{font-size:14px;color:var(--muted);text-wrap:balance}
+/* CTA «a tu medida»: bloque propio, fuera de la cuadrícula de diseños */
+.bespoke{display:flex;flex-direction:column;gap:22px;margin-top:clamp(48px,6vw,72px);padding:clamp(24px,3.4vw,36px) clamp(22px,3.6vw,44px);background:var(--blush);border:1px solid var(--line);border-radius:20px}
+.bespoke-t{display:flex;flex-direction:column;gap:8px;min-width:0}
+.bespoke-t h3{font:600 clamp(20px,2.2vw,24px)/1.2 var(--sans);letter-spacing:-.02em}
+.bespoke-t p{font-size:15px;color:var(--muted);max-width:32em;text-wrap:balance}
+.bespoke-a{display:flex;flex-direction:column;gap:14px;min-width:0}
+.bespoke-a .price{font:600 22px/1 var(--sans);letter-spacing:-.02em}
+.bespoke-a .btn{width:100%}
+@media(min-width:760px){
+  .bespoke{flex-direction:row;align-items:center;justify-content:space-between;gap:40px}
+  .bespoke-a{flex-direction:row;align-items:center;gap:26px;flex:none}
+  .bespoke-a .btn{width:auto;padding:0 26px}
+}
 .note{font-size:13.5px;color:var(--muted);margin-top:clamp(32px,4vw,40px);max-width:44em}
 @keyframes cardIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
 @keyframes fade{from{opacity:0}to{opacity:1}}
@@ -444,12 +451,6 @@ input:focus,select:focus{border-color:var(--accent);outline:none;box-shadow:0 0 
       <li>La ves antes de pagar</li>
     </ul>
   </div>
-  <div class="wrap hfoot">
-    <p class="cap" id="heroCap">Portadas de ejemplo.</p>
-    <nav class="evl" aria-label="Eventos">
-      <a href="#catalogo" data-f="Bodas">Bodas</a><a href="#catalogo" data-f="XV años">XV años</a><a href="#catalogo" data-f="Bautizos">Bautizos</a><a href="#catalogo" data-f="Baby shower">Baby shower</a><a href="#catalogo" data-f="Cumpleaños">Cumpleaños</a><a href="#catalogo" data-f="Graduación">Graduación</a>
-    </nav>
-  </div>
 </section>
 
 <!-- CATÁLOGO -->
@@ -464,6 +465,17 @@ input:focus,select:focus{border-color:var(--accent);outline:none;box-shadow:0 0 
     </div>
     <p class="count" id="count" aria-live="polite"></p>
     <div class="grid" id="grid"></div>
+    <aside class="bespoke" aria-labelledby="h-bespoke">
+      <div class="bespoke-t">
+        <span class="kind">A tu medida</span>
+        <h3 id="h-bespoke">¿No ves el tuyo?</h3>
+        <p>Creamos tu invitación desde cero, con tu temática y tus colores.</p>
+      </div>
+      <div class="bespoke-a">
+        <span class="price">S/ 39.90</span>
+        <a class="btn btn-s wa" href="https://wa.me/" data-m="Hola, quiero una invitación personalizada (S/ 39.90).">Pedir diseño personalizado</a>
+      </div>
+    </aside>
     <p class="note" id="note">Portadas de ejemplo. Cada invitación se llena con tus nombres, fecha, lugar, fotos y canción.</p>
   </div>
 </section>
@@ -672,7 +684,6 @@ function cover(d, inPhone){
 (function(){
   var items = DESIGNS.filter(function(d){return d.hero}).slice(0,6);
   $("floats").innerHTML = items.map(function(d){return '<div class="fcard"><div class="fcin">'+cover(d,true)+'</div></div>'}).join('');
-  $("heroCap").hidden = !anyPlaceholder;
 })();
 
 /* ==========================================================================
@@ -703,9 +714,6 @@ function drawGrid(){
       '<div class="cact"><a class="btn btn-s pick wa" href="https://wa.me/" data-m="Hola, quiero la invitación «'+esc(d.name)+'» ('+esc(d.category)+').">Elegir diseño</a>'+demo+'</div>'+
     '</article>';
   }).join("");
-  html += '<article class="card custom" style="--i:'+Math.min(list.length,8)+'"><div class="cover"><h3>¿No ves el tuyo?</h3><p>Lo diseñamos desde cero con tu temática y tus colores.</p></div>'+
-    '<div class="cmeta"><p class="ccat">A tu medida</p><div class="crow"><h3>Diseño personalizado</h3><span class="price">'+money(39.90)+'</span></div></div>'+
-    '<div class="cact"><a class="btn btn-s pick wa" href="https://wa.me/" data-m="Hola, quiero una invitación personalizada (S/ 39.90).">Pedir el mío</a></div></article>';
   $("grid").innerHTML = html;
   $("count").textContent = list.length + (list.length===1 ? " diseño" : " diseños") + (state.filter==="Todos" ? "" : " en "+state.filter);
   bindWA($("grid"));
